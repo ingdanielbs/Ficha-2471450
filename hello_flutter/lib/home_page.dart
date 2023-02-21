@@ -147,7 +147,10 @@ class HomePage extends StatelessWidget {
                     const Icon(Icons.add_card)
                   ],
                 ),
-              )
+      
+              ),
+              /* Image.network("https://images.unsplash.com/photo-1587854692152-cbe660dbde88?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=869&q=80", width: 10,), */
+              Image.asset('assets/images/medicina.webp')
             ],
           ),
         )
