@@ -1,4 +1,9 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:hello_flutter/appbar_nav.dart';
+import 'package:hello_flutter/medicos_page.dart';
+
+import 'carousel_img.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -6,20 +11,9 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 198, 43, 77),
-          title: const Text('Mi app'),
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.access_alarm),
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.home),
-            ),
-          ],
-        ),
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(70),
+        child: AppBarNav(title: 'Medical Help')),
         drawer: Drawer(),
         body: Padding(
           padding: const EdgeInsets.only(top: 30),
@@ -38,7 +32,9 @@ class HomePage extends StatelessWidget {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10))),
                         child: IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>const MedicosPage(),),);
+                          },
                           icon: const Icon(
                             Icons.supervisor_account,
                             size: 50,
@@ -150,7 +146,21 @@ class HomePage extends StatelessWidget {
       
               ),
               /* Image.network("https://images.unsplash.com/photo-1587854692152-cbe660dbde88?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=869&q=80", width: 10,), */
-              Image.asset('assets/images/medicina.webp')
+              /* Image.asset('assets/images/medicina.webp') */
+              const Padding(
+                padding: EdgeInsets.only(top: 40, bottom: 10),
+                child: Text('Servicios', style: TextStyle(color: Color.fromARGB(200, 198, 43, 77), fontSize: 18, fontWeight: FontWeight.bold),),
+              ),
+              CarouselSlider(
+          options: CarouselOptions(
+            autoPlay: true,
+            autoPlayAnimationDuration: const Duration(seconds: 3),
+            aspectRatio: 2.0,
+            enlargeCenterPage: true,
+            enlargeStrategy: CenterPageEnlargeStrategy.height,
+          ),
+          items: imageSliders,
+        ),
             ],
           ),
         )
