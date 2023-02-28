@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hello_flutter/medico_detail_page.dart';
 import 'package:hello_flutter/medicos_list.dart';
 
 import 'appbar_nav.dart';
@@ -26,7 +27,9 @@ class MedicosPage extends StatelessWidget {
                   backgroundImage: NetworkImage(listaMedicos[index]['imagen']),
                 ), 
                 Text("${listaMedicos[index]['nombre']} ${listaMedicos[index]['apellido']}"),
-                IconButton(onPressed: (){}, icon: const Icon(Icons.arrow_forward))
+                IconButton(onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>MedicoDetail(medico: listaMedicos[index])));
+                }, icon: const Icon(Icons.arrow_forward))
               ],
             ),
           );
