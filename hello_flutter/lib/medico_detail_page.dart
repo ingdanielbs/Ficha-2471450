@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hello_flutter/styles.dart';
 
 import 'appbar_nav.dart';
 
@@ -54,9 +55,90 @@ class MedicoDetail extends StatelessWidget {
                     ],
                   ),
                 ),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              ListTile(
+                title: const Text(
+                  'Información personal',
+                  style: TextStyle(fontSize: 18),
+                ),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Correo: ${medico['correo']}',
+                      style: Styles.subtitulo,
+                    ),
+                    Text('Teléfono: ${medico['telefono']}',
+                        style: Styles.subtitulo),
+                    /* medico['estado'] ? const Text('Activo', style: TextStyle(color: Colors.green), ) : const Text('Activo', style: TextStyle(color: Colors.red), ), */
+                    Row(
+                      children: [
+                        const Text('Estado: '),
+                        validacionEstado(medico['estado']),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            SizedBox(height: 30,),
+              ListTile(
+                title: const Text(
+                  'Entidades aliadas',
+                  style: TextStyle(fontSize: 18),
+                ),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    for(var entidad in medico['entidades'])Text(entidad, style: Styles.subtitulo,), 
+                  Text('aaaa'),
+                  Text('aaaa'),
+                  Text('aaaa'),
+                  Text('aaaa'),
+                  Text('aaaa'),
+                  Text('aaaa'),
+                  Text('aaaa'),
+                  Text('aaaa'),
+                  Text('aaaa'),
+                  Text('aaaa'),
+                  Text('aaaa'),
+                  Text('aaaa'),
+Text('aaaa'),
+                  Text('aaaa'),
+                  Text('aaaa'),
+                  Text('aaaa'),
+                  Text('aaaa'),
+                  Text('aaaa'),
+                  Text('aaaa'),
+                  Text('aaaa'),
+                  Text('aaaa'),
+                  Text('aaaa'),
+                  Text('aaaa'),
+                  Text('aaaa'),
+                  Text('aaaa'),
+                  Text('aaaa'),
+
+                  ],
+                ),
               )
             ],
           ),
         ));
+  }
+
+  Widget validacionEstado(bool estado) {
+    if (estado) {
+      return const Text(
+        'Activo',
+        style: TextStyle(color: Colors.green, fontSize: 16),
+      );
+    } else {
+      return const Text(
+        'Inactivo',
+        style: TextStyle(color: Colors.red, fontSize: 16),
+      );
+    }
   }
 }
