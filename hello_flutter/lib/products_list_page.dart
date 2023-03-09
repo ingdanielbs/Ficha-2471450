@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hello_flutter/cart_page.dart';
 import 'package:hello_flutter/product.dart';
 import 'package:hello_flutter/products.dart';
 
@@ -12,6 +13,14 @@ class ProductsList extends StatefulWidget {
 }
 
 class _ProductsListState extends State<ProductsList> {
+  List<Product> cart = [];
+
+  void addCart(Product product) {
+    setState(() {
+      cart.add(product);
+    });
+  }
+
   void aumentar(var i) {
     setState(() {
       i.quantity++;
@@ -29,72 +38,75 @@ class _ProductsListState extends State<ProductsList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(70),
-          child: AppBarNav(title: 'Farmacia'),
-        ),
-        body: ListView.separated(
-          itemCount: products.length,
-          separatorBuilder: (BuildContext context, int index) =>
-              const Divider(),
-          itemBuilder: (BuildContext context, int index) {
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Container(
-                  width: 90,
-                  height: 90,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: NetworkImage(products[index].imageUrl!))),
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      products[index].name!,
-                      style: const TextStyle(
-                          fontSize: 17, fontWeight: FontWeight.bold),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(70),
+        child: AppBarNav(title: 'Farmacia'),
+      ),
+      body: ListView.separated(
+        itemCount: products.length,
+        separatorBuilder: (BuildContext context, int index) => const Divider(),
+        itemBuilder: (BuildContext context, int index) {
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                width: 90,
+                height: 90,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: NetworkImage(products[index].imageUrl!))),
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    products[index].name!,
+                    style: const TextStyle(
+                        fontSize: 17, fontWeight: FontWeight.bold),
+                  ),
+                  Text('\$ ${products[index].price}'),
+                  Container(
+                    height: 40,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(8)),
+                        border: Border.all(color: Colors.grey)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        IconButton(
+                            onPressed: () {
+                              disminuir(products[index]);
+                            },
+                            icon: Icon(Icons.remove)),
+                        Text('${products[index].quantity}'),
+                        IconButton(
+                            onPressed: () {
+                              aumentar(products[index]);
+                            },
+                            icon: Icon(Icons.add))
+                      ],
                     ),
-                    Text('\$ ${products[index].price}'),
-                    Container(
-                      height: 40,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(8)),
-                          border: Border.all(color: Colors.grey)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          IconButton(
-                              onPressed: () {
-                                disminuir(products[index]);
-                              },
-                              icon: Icon(Icons.remove)),
-                          Text('${products[index].quantity}'),
-                          IconButton(
-                              onPressed: () {
-                                aumentar(products[index]);
-                              },
-                              icon: Icon(Icons.add))
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-                IconButton(
-                    onPressed: () {}, icon: Icon(Icons.add_shopping_cart))
-              ],
-            );
-          },
-        ),
-        
-        floatingActionButton: FloatingActionButton(
-          onPressed: (){},
-          child: Icon(Icons.shopping_cart),
-          backgroundColor: Colors.red,
-
-          ),
-        );
+                  )
+                ],
+              ),
+              IconButton(
+                  onPressed: () {
+                    addCart(products[index]);
+                  },
+                  icon: Icon(Icons.add_shopping_cart))
+            ],
+          );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => CartPage(cart: cart)));
+        },
+        child: Icon(Icons.shopping_cart),
+        backgroundColor: Colors.red,
+      ),
+    );
   }
 }

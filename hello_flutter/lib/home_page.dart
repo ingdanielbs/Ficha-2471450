@@ -166,7 +166,7 @@ class HomePage extends StatelessWidget {
         ),
             ],
           ),
-        )
+        ),
 
         /* Center(
         child: Column(
@@ -195,7 +195,30 @@ class HomePage extends StatelessWidget {
             ),
           ],
         ),
-      ), */
+      ), 
+      
+      */
+
+      /* bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.bookmark),
+           label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.contact_mail),
+            label: 'Home',
+          ),
+        ],
+        ), */
+        /* currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber[800],
+        onTap: _onItemTapped, */
+      
         );
   }
 }
